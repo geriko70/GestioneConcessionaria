@@ -1,10 +1,8 @@
-import { useEffect,useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import "./StockTable.css"
 import VehicleDetailModal from "./VehicleDetailModal";
 import VehicleModifyModal from "./VehicleModifyModal";
-const StockTable = ( ) => {
-    const [veicoli, setVeicoli] = useState([]);
+const StockTable = ({veicoli}) => {
     const [selectedVehicle,setSelectedVehicle]=useState(null);
     const [isVeichleModalOpen,setIsVehicleModalOpen]=useState(false);
     const [isModifyModalOpen,setIsModifyModalOpen]=useState(false);
@@ -40,17 +38,6 @@ const StockTable = ( ) => {
         setFiltroModello("");
         setFiltroTarga("");
     }
-    useEffect(() => {
-        // Chiamata al backend Django
-        axios.get('https://gestioneconcessionaria.onrender.com/api/veicoli/')
-            .then(response => {
-                setVeicoli(response.data);
-            })
-            .catch(error => {
-
-                console.error("Errore API:", error);
-            });
-    }, []);
     const veicoliFiltrati=veicoli.filter(v=>
                     v.stato!=="venduto" && 
                     (filtroTarga=="" || v.targa.includes(filtroTarga)) &&

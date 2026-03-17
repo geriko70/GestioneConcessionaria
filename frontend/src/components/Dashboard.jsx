@@ -3,32 +3,11 @@ import './Dashboard.css';
 import SalesLineChart from './DashboardPages/SalesLineChart';
 import StockPieChart from './DashboardPages/StockPieChart';
 import SellerBarChart from './DashboardPages/SellerBarChart';
-import { useState,useEffect} from 'react';
-import axios from 'axios';
-const Dashboard = () => {
+import { useState} from 'react';
+const Dashboard = ({veicoli,vendite}) => {
     const [activeTab, setActiveTab] = useState('stock');
     const [activeTab2, setActiveTab2] = useState('status');
     const [activeTab3, setActiveTab3] = useState('months');
-    const [veicoli,setVeicoli]=useState([]);
-    const [vendite,setVendite]=useState([]);
-
-    useEffect(() => {
-    axios.get('https://gestioneconcessionaria.onrender.com/api/veicoli/')
-            .then(response => {
-                setVeicoli(response.data);
-            })
-            .catch(error => {
-                console.error("Errore API:", error);
-            });
-    axios.get('https://gestioneconcessionaria.onrender.com/api/vendite/')
-            .then(response => {
-                setVendite(response.data);
-            })
-            .catch(error => {
-                console.error("Errore API:", error);
-            });
-    }, []);
-    
 
     return (
         <div className="container-fluid">

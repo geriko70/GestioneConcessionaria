@@ -1,24 +1,12 @@
-import { useEffect,useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import SaleDetailModal from "./SaleDetailModal";
-const SalesTable = ( ) => {
-    const [vendite, setVendite] = useState([]);
+const SalesTable = ({vendite}) => {
     const [selectedSale,setSelectedSale]=useState(null);
     const [isModalOpen,setIsModalOpen]=useState(false);
     const handleOpenDetails=(vendita)=>{
         setSelectedSale(vendita);
         setIsModalOpen(true);
     }
-    useEffect(() => {
-        // Chiamata al backend Django
-        axios.get('https://gestioneconcessionaria.onrender.com/api/vendite/')
-            .then(response => {
-                setVendite(response.data);
-            })
-            .catch(error => {
-                console.error("Errore API:", error);
-            });
-    }, []);
 
     return (
         <div>
