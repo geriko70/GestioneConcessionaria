@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react'; // Aggiunto per la gestione dei dati
 import { Bar } from 'react-chartjs-2';
 // RIMOSSO: import { initialVehicles } from '../data/vehicles'; 
 import {
@@ -10,24 +9,11 @@ import {
   Legend,
 } from 'chart.js';
 import './BrandBarChart.css';
-import axios from 'axios';
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
-const BrandBarChart = () => {
+const BrandBarChart = ({veicoli}) => {
     // --- NUOVA LOGICA DI STATO ---
-    const [veicoli, setVeicoli] = useState([]);
-
-    useEffect(() => {
-        // Chiamata al backend Django
-        axios.get('https://gestioneconcessionaria.onrender.com/api/veicoli/')
-            .then(response => {
-                setVeicoli(response.data);
-            })
-            .catch(error => {
-                console.error("Errore API:", error);
-            });
-    }, []);
 
     // --- TUA LOGICA ORIGINALE (Adattata alla variabile 'veicoli') ---
     const brandDisponibili = veicoli

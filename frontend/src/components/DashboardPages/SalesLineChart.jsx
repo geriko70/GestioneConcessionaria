@@ -9,22 +9,11 @@ import {
     Legend,
 } from 'chart.js';
 import './SalesLineChart.css';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement,Tooltip, Legend);
 
-const SalesLineChart=()=>{
-    const [salesData, setVendite] = useState([]);
-    useEffect(() => {
-    axios.get('https://gestioneconcessionaria.onrender.com/api/vendite/')
-            .then(response => {
-                setVendite(response.data);
-            })
-            .catch(error => {
-                console.error("Errore API:", error);
-            });
-    }, []);
+const SalesLineChart=({vendite})=>{
     const venditeMensili = new Array(12).fill(0); // Inizializza un array con 12 zeri
     const margineMensile = new Array(12).fill(0); // Inizializza un array con 12 zeri per i margini
     const meseLabels=new Array(12);
@@ -48,7 +37,7 @@ const SalesLineChart=()=>{
         }
     } 
     let indiceMese=0;
-    const venditeAnnuali=salesData.filter(sale=>new Date(sale.data_vendita)>=dataRiferimento);
+    const venditeAnnuali=vendite.filter(sale=>new Date(sale.data_vendita)>=dataRiferimento);
     venditeAnnuali.forEach(sale => {
         indiceMese = new Date(sale.data_vendita).getMonth(); // Restituisce 0 per Gennaio, 1 per Febbraio...
         indiceMese = (indiceMese - (meseRiferimento+1) + 12  ) % 12; // Calcola l'indice corretto per il grafico

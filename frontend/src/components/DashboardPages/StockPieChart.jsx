@@ -6,29 +6,9 @@ import {
   Legend,
 } from 'chart.js';
 import './StockPieChart.css';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-const StockPieChart=()=>{
-    const [veicoli, setVeicoli] = useState([]);
-    const [vendite, setVendite] = useState([]);
-    useEffect(() => {
-    axios.get('https://gestioneconcessionaria.onrender.com/api/veicoli/')
-            .then(response => {
-                setVeicoli(response.data);
-            })
-            .catch(error => {
-                console.error("Errore API:", error);
-            });
-    axios.get('https://gestioneconcessionaria.onrender.com/api/vendite/')
-            .then(response => {
-                setVendite(response.data);
-            })
-            .catch(error => {
-                console.error("Errore API:", error);
-            });
-    }, []);
+const StockPieChart=({veicoli,vendite})=>{
     const oggi = new Date().toISOString().split('T')[0];
     const disponibili=veicoli.filter(v=>v.stato==="disponibile").length;
     const officina=veicoli.filter(v=>v.stato==="officina").length;

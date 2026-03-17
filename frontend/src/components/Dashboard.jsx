@@ -3,12 +3,32 @@ import './Dashboard.css';
 import SalesLineChart from './DashboardPages/SalesLineChart';
 import StockPieChart from './DashboardPages/StockPieChart';
 import SellerBarChart from './DashboardPages/SellerBarChart';
-import { useState } from 'react';
-
+import { useState,useEffect} from 'react';
+import axios from 'axios';
 const Dashboard = () => {
     const [activeTab, setActiveTab] = useState('stock');
     const [activeTab2, setActiveTab2] = useState('status');
     const [activeTab3, setActiveTab3] = useState('months');
+    const [veicoli,setVeicoli]=useState([]);
+    const [vendite,setVendite]=useState([]);
+
+    useEffect(() => {
+    axios.get('https://gestioneconcessionaria.onrender.com/api/veicoli/')
+            .then(response => {
+                setVeicoli(response.data);
+            })
+            .catch(error => {
+                console.error("Errore API:", error);
+            });
+    axios.get('https://gestioneconcessionaria.onrender.com/api/vendite/')
+            .then(response => {
+                setVendite(response.data);
+            })
+            .catch(error => {
+                console.error("Errore API:", error);
+            });
+    }, []);
+    
 
     return (
         <div className="container-fluid">
@@ -25,8 +45,8 @@ const Dashboard = () => {
             <div className="tab-content">
                 {activeTab === 'stock' && 
                     <div className="row second-row">
-                        {activeTab2 === 'status' && <div className="col-10"><StockPieChart /></div>}
-                        {activeTab2 === 'brands' && <div className="col-10"><BrandBarChart /></div>}
+                        {activeTab2 === 'status' && <div className="col-10"><StockPieChart veicoli={veicoli} vendite={vendite}/></div>}
+                        {activeTab2 === 'brands' && <div className="col-10"><BrandBarChart veicoli={veicoli}/></div>}
                         <div className="col-2">
                             <div className='right-sidebar bg-light rounded shadow'>
                                 <ul className="sidebar-card nav nav-pills">
@@ -49,8 +69,8 @@ const Dashboard = () => {
                 }
                 {activeTab === 'sales' && 
                     <div className="row second-row">
-                        {activeTab3 === 'months' && <div className="col-10 "><SalesLineChart /></div>}
-                        {activeTab3 === 'seller' && <div className="col-10"><SellerBarChart /></div>}
+                        {activeTab3 === 'months' && <div className="col-10 "><SalesLineChart vendite={vendite}/></div>}
+                        {activeTab3 === 'seller' && <div className="col-10"><SellerBarChart vendite={vendite}/></div>}
                         <div className="col-2">
                             <div className='right-sidebar bg-light rounded shadow'>
                                 <ul className="sidebar-card nav nav-pills">

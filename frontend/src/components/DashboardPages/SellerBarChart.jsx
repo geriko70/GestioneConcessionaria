@@ -8,25 +8,15 @@ import {
   Legend,
 } from 'chart.js';
 import './SellerBarChart.css';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+
 
 ChartJS.register(BarElement,CategoryScale,LinearScale, Tooltip, Legend);
-const SellerBarChart=()=>{
-    const [salesData, setVendite] = useState([]);
-    useEffect(() => {
-    axios.get('https://gestioneconcessionaria.onrender.com/api/vendite/')
-            .then(response => {
-                setVendite(response.data);
-            })
-            .catch(error => {
-                console.error("Errore API:", error);
-            });
-    }, []);
-    const venditoriTotali=salesData.map(sale=>sale.venditore);
+const SellerBarChart=({vendite})=>{
+
+    const venditoriTotali=vendite.map(sale=>sale.venditore);
     const venditori=[...new Set(venditoriTotali)];
     const venditePerVenditore=venditori.map(venditore=>{
-        return salesData.filter(sale=>sale.venditore===venditore).length;
+        return vendite.filter(sale=>sale.venditore===venditore).length;
     });
     venditePerVenditore.sort((a,b)=>b-a); // Ordina in ordine decrescente
     const data={
