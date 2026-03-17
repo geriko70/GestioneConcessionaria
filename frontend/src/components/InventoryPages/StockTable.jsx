@@ -2,12 +2,12 @@ import { useEffect,useState } from "react";
 import axios from "axios";
 import "./StockTable.css"
 import VehicleDetailModal from "./VehicleDetailModal";
-//import VehicleModifyModal from "./VehicleModifyModal";
+import VehicleModifyModal from "./VehicleModifyModal";
 const StockTable = ( ) => {
     const [veicoli, setVeicoli] = useState([]);
     const [selectedVehicle,setSelectedVehicle]=useState(null);
     const [isVeichleModalOpen,setIsVehicleModalOpen]=useState(false);
-    //const [isModifyModalOpen,setIsModifyModalOpen]=useState(false);
+    const [isModifyModalOpen,setIsModifyModalOpen]=useState(false);
 
     const [filtroTarga, setFiltroTarga] = useState("");
     const [filtroMarca,setFiltroMarca]=useState("");
@@ -18,7 +18,10 @@ const StockTable = ( ) => {
         setSelectedVehicle(veicolo);
         setIsVehicleModalOpen(true);
     }
-    
+    const handleOpenModify=(veicolo)=>{
+        setSelectedVehicle(veicolo);
+        setIsModifyModalOpen(true);
+    }
     const handleMarcaChange=(e)=>{
         const marcaSelezionato=e.target.value;
         setFiltroMarca(marcaSelezionato);
@@ -174,7 +177,7 @@ const StockTable = ( ) => {
                         <div className="btn-group gap-4">
                             <button onClick={() => handleOpenDetails(veicolo)} className="sell-button btn btn-sm btn-info">Info</button>
                             <button className="btn btn-sm btn-outline-success">Vendi</button>
-                            <button className="btn btn-sm btn-warning">Modifica</button>
+                            <button onClick={() => handleOpenModify(veicolo)}className="btn btn-sm btn-warning">Modifica</button>
                         </div>
                     </td>
                 </tr>
@@ -193,6 +196,13 @@ const StockTable = ( ) => {
             setSelectedVehicle={setSelectedVehicle} 
             selectedVehicle={selectedVehicle} 
             setIsVehicleModalOpen={setIsVehicleModalOpen}
+            />
+        }
+        {isModifyModalOpen===true && 
+            <VehicleModifyModal 
+            setSelectedVehicle={setSelectedVehicle} 
+            selectedVehicle={selectedVehicle} 
+            setIsModifyModalOpen={setIsModifyModalOpen}
             />
         }  
         </div>
