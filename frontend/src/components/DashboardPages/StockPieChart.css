@@ -1,0 +1,11 @@
+.pie-stock-card{
+    width: 100%;
+    max-width:500px; /* Qui decidi quanto può diventare grande al massimo */
+    margin: 0 auto;
+}
+.pie-wrapper {
+    position: relative;
+    width: 100%;
+    height: 450px; /* Diamo un'altezza certa per evitare che "crei" spazio in giù */
+    margin-top: 20px;
+}

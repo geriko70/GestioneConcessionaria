@@ -1,0 +1,23 @@
+/* Stile per il select attivo */
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: white;
+  color: #333;
+}
+
+/* Stile per il select disattivato */
+select:disabled {
+  background-color: #e9ecef; /* Sfondo grigio chiaro */
+  color: #6c757d;           /* Testo grigio */
+  border-color: #ced4da;    /* Bordo più tenue */
+  cursor: not-allowed;      /* Cursore "divieto" */
+  opacity: 1;               /* Rimuove l'opacità predefinita di alcuni browser */
+}
+thead th {
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa; /* Deve essere un colore solido, non trasparente */
+    z-index: 10;               /* Assicura che l'header stia "sopra" tutto il resto */
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1); /* Opzionale: aggiunge una riga d'ombra sotto l'header */
+}

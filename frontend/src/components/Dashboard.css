@@ -1,0 +1,95 @@
+.nav-link:hover{
+    background-color: lightgray;
+}
+.second-row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nav-button{
+    min-width:50%;
+}
+
+.right-sidebar{
+    min-width: 170px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-left: auto solid #eee;
+}
+
+.sidebar-card {max-width: 160px; 
+    padding-top: 8px;
+    padding-bottom: 8px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.switch-button {
+    width:160px; 
+    transition: all 0.3s ease; /* Rendiamo l'hover più fluido */
+    min-height: 64px;
+}
+
+
+@media (max-width:1400px){
+    .right-sidebar{
+        min-width: 130px;
+        max-height: 250px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-left: auto solid #eee;
+    }
+    .switch-button{
+        max-width:120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+}
+@media (max-width:1150px){
+    .right-sidebar{
+        min-width: 110px;
+        max-height: 250px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-left: auto solid #eee;
+    }
+    .switch-button{
+        max-width:100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+@media (max-width: 1000px) {
+    .right-sidebar {
+        min-width: 90px;
+        padding: 10px 0;
+        max-height: 250px;
+    }
+
+    .button-text {
+        display: none; /* SPARISCE IL TESTO */
+    }
+
+    .switch-button {
+        width: 65px;   /* Il bottone diventa un quadratino */
+        height: 45px;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem; /* Ingrandiamo un po' l'emoji */
+    }
+
+}
