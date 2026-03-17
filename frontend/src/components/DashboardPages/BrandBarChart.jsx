@@ -20,7 +20,7 @@ const BrandBarChart = () => {
 
     useEffect(() => {
         // Chiamata al backend Django
-        axios.get('http://localhost:8000/api/veicoli/')
+        axios.get('https://gestioneconcessionaria.onrender.com/api/veicoli/')
             .then(response => {
                 setVeicoli(response.data);
             })

@@ -11,7 +11,7 @@ const SalesTable = ( ) => {
     }
     useEffect(() => {
         // Chiamata al backend Django
-        axios.get('http://localhost:8000/api/vendite/')
+        axios.get('https://gestioneconcessionaria.onrender.com/api/vendite/')
             .then(response => {
                 setVendite(response.data);
             })

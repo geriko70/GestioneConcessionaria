@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # --- CONFIGURAZIONE DEPLOY (Aggiunta) ---
 # Se siamo su Render, usiamo le variabili d'ambiente, altrimenti i default per il locale
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-_4%^8p($nr3cgq^rxhq5^u56=5-7!%7xo93xop-*d*v_iicpqi')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'd57bf6e121f968e71b495b0f2a6f62d6')
 
 # In produzione DEBUG deve essere False. Su Render imposteremo la variabile d'ambiente DEBUG=True se serve testare.
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'

@@ -14,14 +14,14 @@ const StockPieChart=()=>{
     const [veicoli, setVeicoli] = useState([]);
     const [vendite, setVendite] = useState([]);
     useEffect(() => {
-    axios.get('http://localhost:8000/api/veicoli/')
+    axios.get('https://gestioneconcessionaria.onrender.com/api/veicoli/')
             .then(response => {
                 setVeicoli(response.data);
             })
             .catch(error => {
                 console.error("Errore API:", error);
             });
-    axios.get('http://localhost:8000/api/vendite/')
+    axios.get('https://gestioneconcessionaria.onrender.com/api/vendite/')
             .then(response => {
                 setVendite(response.data);
             })

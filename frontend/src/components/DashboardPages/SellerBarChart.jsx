@@ -15,7 +15,7 @@ ChartJS.register(BarElement,CategoryScale,LinearScale, Tooltip, Legend);
 const SellerBarChart=()=>{
     const [salesData, setVendite] = useState([]);
     useEffect(() => {
-    axios.get('http://localhost:8000/api/vendite/')
+    axios.get('https://gestioneconcessionaria.onrender.com/api/vendite/')
             .then(response => {
                 setVendite(response.data);
             })
