@@ -76,7 +76,7 @@ const StockTable = ({veicoli}) => {
                 <th style={{width:"18%"}}>
                     <div className="d-flex gap-2">
                         <span className="gap">Targa</span>
-                        <input placeholder="Cerca Targa" onChange={handleTargaChange}className="card form-select-sm" type="search"></input>
+                        <input value={filtroTarga} placeholder="Cerca Targa" onChange={handleTargaChange}className="card form-select-sm" type="search"></input>
                     </div>
                 </th>
                 {/*FILTRO MARCA*/}
