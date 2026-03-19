@@ -1,11 +1,12 @@
 import {useState} from 'react';
 const VehicleModifyModal = ({ selectedVehicle, setIsModifyModalOpen, setSelectedVehicle }) => {
-    const [cambioModifica,setCambioModifica]=useState("");
-    //const [chilometriModifica,setChilometriModifica]=useState("");
-    //const [prezzoListinoModifica,setPrezzoListinoModifica]=useState("");
-    const [statoModifica,setStatoModifica]=useState("");
-    const [classe_ambientaleModifica,setClasse_ambientaleModifica]=useState("");
-    const [alimentazioneModifica,setAlimentazioneModifica]=useState("");
+    const [cambioModifica,setCambioModifica]=useState(selectedVehicle.cambio);
+    //const [chilometriModifica,setChilometriModifica]=useState(selectedVehicle.km);
+    //const [prezzoListinoModifica,setPrezzoListinoModifica]=useState(selectedVehicle.prezzo_listino);
+    const [statoModifica,setStatoModifica]=useState(selectedVehicle.stato);
+    const [classe_ambientaleModifica,setClasse_ambientaleModifica]=useState(selectedVehicle.classe_ambientale);
+    const [alimentazioneModifica,setAlimentazioneModifica]=useState(selectedVehicle.alimentazione);
+    const [n_proprietariModifica,setN_proprietariModifica]=useState(selectedVehicle.n_proprietari);
     //const [targaModificata,setTargaModificata()]=useState("");
     //const [targaModificata,setTargaModificata()]=useState("");
 
@@ -23,6 +24,15 @@ const VehicleModifyModal = ({ selectedVehicle, setIsModifyModalOpen, setSelected
     const handleCambioChange=(e)=>{
         const cambioModifica=e.target.value;
         setCambioModifica(cambioModifica);
+    }
+    const handleClasse_AmbientaleChange=(e)=>{
+        const classe_ambientaleModifica=e.target.value;
+        setClasse_ambientaleModifica(classe_ambientaleModifica);
+    }
+    
+    const handleN_proprietariChange=(e)=>{
+        const n_proprietariModifica=e.target.value;
+        setN_proprietariModifica(n_proprietariModifica);
     }
     
     const close = () => {
@@ -77,7 +87,7 @@ const VehicleModifyModal = ({ selectedVehicle, setIsModifyModalOpen, setSelected
                                 <span className={`fw-semibold`}>
                                     {selectedVehicle.alimentazione.toUpperCase()}
                                 </span>
-                                <select value={alimentazioneModifica} onChange={handleAlimentazioneChange}className="form-select form-select-sm">
+                                <select value={alimentazioneModifica.toLowerCase()} onChange={handleAlimentazioneChange} className="form-select form-select-sm">
                                     <option value="transito">
                                         Benzina
                                     </option>
@@ -130,15 +140,15 @@ const VehicleModifyModal = ({ selectedVehicle, setIsModifyModalOpen, setSelected
                                 <span className={`fw-semibold`}>
                                     {selectedVehicle.classe_ambientale.toUpperCase()}
                                 </span>
-                                <select disabled={(alimentazioneModifica=="elettrica"||selectedVehicle.alimentazione=="elettrica")} value={(alimentazioneModifica=="elettrica"||selectedVehicle.alimentazione=="elettrica")?"elettrico":classe_ambientaleModifica} title={(alimentazioneModifica=="elettrica"||selectedVehicle.alimentazione=="elettrica")?"Se è alimentata elettrica può essere solo di classe elettrica" : ""} onChange={setClasse_ambientaleModifica}className="form-select form-select-sm">
+                                <select disabled={alimentazioneModifica.toLowerCase()=="elettrica"} value={alimentazioneModifica.toLowerCase()=="elettrica" ?"elettrico":classe_ambientaleModifica} title={alimentazioneModifica=="elettrica" ?"Se è alimentata elettrica può essere solo di classe elettrica" : ""} onChange={handleClasse_AmbientaleChange}className="form-select form-select-sm">
                                     <option value="euro4">
-                                        Euro 4
+                                        Euro 3
                                     </option>
                                     <option value="euro5">
-                                        Automatico
+                                        Euro4
                                     </option>
                                     <option value="euro6">
-                                        Euro 4
+                                        Euro 5
                                     </option>
                                     <option value="elettrico">
                                         Elettrico
@@ -148,7 +158,7 @@ const VehicleModifyModal = ({ selectedVehicle, setIsModifyModalOpen, setSelected
                             <div className="col-6 col-md-3">
                                 <p className="text-muted mb-1">N° Proprietari</p>
                                 <span className="fw-semibold">{selectedVehicle.n_proprietari}</span>
-                                <input type="number" placeholder={selectedVehicle.n_proprietari} start={selectedVehicle.n_proprietari} min="1" className='form-control-sm form-control'></input>
+                                <input onChange={handleN_proprietariChange} value={n_proprietariModifica}type="number" min="1" className='form-control-sm form-control'></input>
                             </div>
                             
                         </div>
