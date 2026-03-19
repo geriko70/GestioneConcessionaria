@@ -1,6 +1,30 @@
+import {useState} from 'react';
 const VehicleModifyModal = ({ selectedVehicle, setIsModifyModalOpen, setSelectedVehicle }) => {
+    const [cambioModifica,setCambioModifica]=useState("");
+    //const [chilometriModifica,setChilometriModifica]=useState("");
+    //const [prezzoListinoModifica,setPrezzoListinoModifica]=useState("");
+    const [statoModifica,setStatoModifica]=useState("");
+    const [classe_ambientaleModifica,setClasse_ambientaleModifica]=useState("");
+    const [alimentazioneModifica,setAlimentazioneModifica]=useState("");
+    //const [targaModificata,setTargaModificata()]=useState("");
+    //const [targaModificata,setTargaModificata()]=useState("");
+
+    
     if (!selectedVehicle) return null;
 
+    const handleStatoChange=(e)=>{
+        const statoModifica=e.target.value;
+        setStatoModifica(statoModifica);
+    }
+    const handleAlimentazioneChange=(e)=>{
+        const alimentazioneModifica=e.target.value;
+        setAlimentazioneModifica(alimentazioneModifica);
+    }
+    const handleCambioChange=(e)=>{
+        const cambioModifica=e.target.value;
+        setCambioModifica(cambioModifica);
+    }
+    
     const close = () => {
         setIsModifyModalOpen(false);
         setSelectedVehicle(null);
@@ -11,85 +35,145 @@ const VehicleModifyModal = ({ selectedVehicle, setIsModifyModalOpen, setSelected
             <div className="modal-dialog modal-lg modal-dialog-centered">
                 <div className="modal-content border-0 shadow-lg">
                     
-                    {/* Header Dinamico */}
-                    <div className={`modal-header text-white bg-dark`}>
-                        <h5 className="modal-title fw-bold">
-                             Dettaglio: {selectedVehicle.marca} {selectedVehicle.modello} — {selectedVehicle.targa.toUpperCase()}
+                    <div className={`modal-header text-warning bg-dark`}>
+                        <h5 className="modal-title fw-bold ">
+                            Modifica veicolo
                         </h5>
                         <button type="button" className="btn-close btn-close-white" onClick={close}></button>
                     </div>
+                    
 
                     <div className="modal-body p-4">
-                        {/* Riga 1: I "Big Three" (Dati che saltano all'occhio) */}
                         <div className="row text-center mb-4">
-                            <div className="col-md-4 border-end">
-                                <p className="text-muted small mb-1">CHILOMETRAGGIO</p>
-                                <h4 className="fw-bold text-primary">{Number(selectedVehicle.km).toLocaleString()} KM</h4>
+                            <div className="col-md-3 border-end">
+                                <p className="text-muted mb-1">CHILOMETRAGGIO </p>
+                                <span className="fw-semibold">{Number(selectedVehicle.km).toLocaleString()} km </span>
+                                <input className="form-control form-control-sm"type="text" ></input>
                             </div>
-                            <div className="col-md-4 border-end">
-                                <p className="text-muted small mb-1">PREZZO LISTINO</p>
-                                <h4 className="fw-bold text-success">€ {Number(selectedVehicle.prezzo_listino).toLocaleString()}</h4>
-                            </div>
-                            <div className="col-md-4">
-                                <p className="text-muted small mb-1">STATO STOCK</p>
-                                <span className={`badge fs-6 ${selectedVehicle.stato === 'disponibile' ? 'bg-success' : 'bg-warning text-dark'}`}>
+                            <div className="col-md-3 border-end">
+                                <p className="text-muted mb-1">PREZZO DI LISTINO </p>
+                                <span className="fw-semibold">{Number(selectedVehicle.prezzo_listino).toLocaleString()} €</span>
+                                <input className="form-control form-control-sm"type="text" ></input>
+                            </div> 
+                            <div className="col-md-3 border-end">
+                                <p className="text-muted mb-1">STATO STOCK</p>
+                                <span className={`fw-semibold`}>
                                     {selectedVehicle.stato.toUpperCase()}
                                 </span>
+                                <select value={statoModifica} onChange={handleStatoChange} className="form-select form-select-sm">
+                                    <option value="transito">
+                                        Transito
+                                    </option>
+                                    <option value="officina">
+                                        Officina
+                                    </option>
+                                    <option value="disponibile">
+                                        Disponibile
+                                    </option>
+                                </select>
+                            </div>
+                            <div className="col-md-3">
+                                <p className="text-muted mb-1">ALIMENTAZIONE</p>
+                                <span className={`fw-semibold`}>
+                                    {selectedVehicle.alimentazione.toUpperCase()}
+                                </span>
+                                <select value={alimentazioneModifica} onChange={handleAlimentazioneChange}className="form-select form-select-sm">
+                                    <option value="transito">
+                                        Benzina
+                                    </option>
+                                    <option value="officina">
+                                        Diesel
+                                    </option>
+                                    <option value="Metano">
+                                        Metano
+                                    </option>
+                                    <option value="gpl">
+                                        GPL
+                                    </option>
+                                    <option value="ibrida">
+                                        Ibrida
+                                    </option>
+                                    <option value="elettrica">
+                                        Elettrica
+                                    </option>
+                                </select>
                             </div>
                         </div>
 
                         <hr />
 
                         {/* Riga 2: Specifiche Tecniche in Griglia */}
-                        <div className="row g-3">
-                            <h6 className="fw-bold text-uppercase small text-secondary mb-3">Caratteristiche Tecniche</h6>
+                        <div className="row text-center g-3">
+                            <h6 className="fw-bold text-uppercase small text-secondary">Caratteristiche Tecniche</h6>
                             
-                            <div className="col-6 col-md-3">
-                                <label className="text-muted d-block small">Alimentazione</label>
-                                <span className="fw-semibold text-capitalize">{selectedVehicle.alimentazione}</span>
+                            <div className="col-3 border-end">
+                                <p className="text-muted mb-1">TARGA </p>
+                                    <span className="fw-semibold">{(selectedVehicle.targa).toLocaleString()} </span>
+                                <input className="form-control form-control-sm"type="text" ></input>
+                            </div>
+                            <div className="col-md-3 border-end">
+                                <p className="text-muted mb-1">CAMBIO</p>
+                                <span className={`fw-semibold`}>
+                                    {selectedVehicle.cambio.toUpperCase()}
+                                </span>
+                                <select value={cambioModifica} onChange={handleCambioChange}className="form-select form-select-sm">
+                                    <option value="manuale">
+                                        Manuale
+                                    </option>
+                                    <option value="automatico">
+                                        Automatico
+                                    </option>
+                                </select>
+                            </div>
+                           <div className="col-md-3 border-end">
+                                <p className="text-muted mb-1">CLASSE AMBIENTALE</p>
+                                <span className={`fw-semibold`}>
+                                    {selectedVehicle.classe_ambientale.toUpperCase()}
+                                </span>
+                                <select disabled={(alimentazioneModifica=="elettrica"||selectedVehicle.alimentazione=="elettrica")} value={(alimentazioneModifica=="elettrica"||selectedVehicle.alimentazione=="elettrica")?"elettrico":classe_ambientaleModifica} title={(alimentazioneModifica=="elettrica"||selectedVehicle.alimentazione=="elettrica")?"Se è alimentata elettrica può essere solo di classe elettrica" : ""} onChange={setClasse_ambientaleModifica}className="form-select form-select-sm">
+                                    <option value="euro4">
+                                        Euro 4
+                                    </option>
+                                    <option value="euro5">
+                                        Automatico
+                                    </option>
+                                    <option value="euro6">
+                                        Euro 4
+                                    </option>
+                                    <option value="elettrico">
+                                        Elettrico
+                                    </option>
+                                </select>
                             </div>
                             <div className="col-6 col-md-3">
-                                <label className="text-muted d-block small">Cambio</label>
-                                <span className="fw-semibold text-capitalize">{selectedVehicle.cambio}</span>
-                            </div>
-                            <div className="col-6 col-md-3">
-                                <label className="text-muted d-block small">Classe Ambientale</label>
-                                <span className="fw-semibold text-uppercase">{selectedVehicle.classe_ambientale}</span>
-                            </div>
-                            <div className="col-6 col-md-3">
-                                <label className="text-muted d-block small">N° Proprietari</label>
+                                <p className="text-muted mb-1">N° Proprietari</p>
                                 <span className="fw-semibold">{selectedVehicle.n_proprietari}</span>
+                                <input type="number" placeholder={selectedVehicle.n_proprietari} start={selectedVehicle.n_proprietari} min="1" className='form-control-sm form-control'></input>
                             </div>
-                            <div className="col-6 col-md-3">
-                                <label className="text-muted d-block small">Anno</label>
-                                <span className="fw-semibold">{selectedVehicle.anno}</span>
-                            </div>
+                            
                         </div>
 
                         <hr />
 
                         {/* Riga 3: Dati Sensibili (Prezzo Acquisto e Margine) */}
-                        <div className="bg-light p-3 rounded">
-                            <h6 className="fw-bold text-uppercase small text-danger mb-2">Dati Riservati</h6>
-                            <div className="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <label className="text-muted small d-block">Costo d'acquisto</label>
-                                    <span className="fw-bold">€ {Number(selectedVehicle.prezzo_acquisto).toLocaleString()}</span>
-                                </div>
-                                <div className="text-end">
-                                    <label className="text-muted small d-block">Margine Lordo Stimato</label>
-                                    <span className="fw-bold text-danger fs-5">
-                                        + € {(selectedVehicle.prezzo_listino - selectedVehicle.prezzo_acquisto).toLocaleString()}
-                                    </span>
-                                </div>
+                        <div className="row text-center g-3">
+                            <div className="col-6 border-end">
+                                <p className="text-muted mb-1">TARGA </p>
+                                    <span className="fw-semibold">{(selectedVehicle.targa).toLocaleString()} </span>
+                                <input className="form-control form-control-sm"type="text" ></input>
+                            </div>
+                            <div className="col-6 border-end">
+                                <p className="text-muted mb-1 ">Prezzo acquisto </p>
+                                    <span className="fw-semibold">{(selectedVehicle.prezzo_acquisto).toLocaleString()} </span>
+                                <input className="form-control form-control-sm"type="text" ></input>
                             </div>
                         </div>
                     </div>
 
                     <div className="modal-footer bg-light border-0">
                         <button type="button" className="btn btn-secondary px-4" onClick={close}>Chiudi</button>
-                        <button type="button" className="btn btn-primary px-4">
-                             Stampa Etichetta Prezzo
+                        <button type="button" className="btn btn-warning px-4">
+                             Effettua la modifica
                         </button>
                     </div>
                 </div>

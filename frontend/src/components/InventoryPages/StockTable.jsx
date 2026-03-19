@@ -73,14 +73,14 @@ const StockTable = ({veicoli}) => {
             <thead>
             <tr>
                 {/*FILTRO TARGA*/}
-                <th style={{width:"18%"}}>
+                <th style={{width:"17%"}}>
                     <div className="d-flex gap-2">
                         <span className="gap">Targa</span>
                         <input value={filtroTarga} placeholder="Cerca Targa" onChange={handleTargaChange}className="card form-select-sm" type="search"></input>
                     </div>
                 </th>
                 {/*FILTRO MARCA*/}
-                <th style={{width:"18%"}}>
+                <th style={{width:"17%"}}>
                     <div className="d-flex gap-2">
                     <span>Marca</span>
                     <select value={filtroMarca} onChange={handleMarcaChange} className="form-select-sm" name="brand_input" id="brand_input">
@@ -141,7 +141,7 @@ const StockTable = ({veicoli}) => {
                             Ripristina filtri
                         </button>
                         <button className="btn btn-sm btn-success"  onClick={handleFilterClear}>
-                            + Aggiungi Veicolo
+                            Aggiungi 
                         </button>
                     </div>
                 </th>
@@ -163,7 +163,7 @@ const StockTable = ({veicoli}) => {
                     <td className=" text-center ">
                         <div className="btn-group gap-4">
                             <button onClick={() => handleOpenDetails(veicolo)} className="sell-button btn btn-sm btn-info">Info</button>
-                            <button className="btn btn-sm btn-outline-success">Vendi</button>
+                            <button className="btn btn-sm btn-success">Vendi</button>
                             <button onClick={() => handleOpenModify(veicolo)}className="btn btn-sm btn-warning">Modifica</button>
                         </div>
                     </td>
