@@ -21,6 +21,26 @@ class VenditaSerializer(serializers.ModelSerializer):
     # Campo calcolato: Il margine reale (Prezzo Vendita - Prezzo Acquisto)
     margine = serializers.SerializerMethodField()
     class Meta:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         model = Vendita
         fields = [
             'id', 'veicolo', 'veicolo_id', 'prezzo_vendita_effettivo', 

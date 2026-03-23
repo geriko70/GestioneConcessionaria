@@ -8,26 +8,26 @@ class Veicolo(models.Model):
     targa = models.CharField(max_length=10, unique=True) # La verità SQL: deve essere unica!
     km = models.PositiveIntegerField(default=0)
     ALIMENTAZIONE_CHOICES = [
-        ('benzina', 'Benzina'),
-        ('diesel', 'Diesel'),
-        ('gpl', 'GPL'),
-        ('metano', 'Metano'),
-        ('ibrida', 'Ibrida'),
-        ('elettrica', 'Elettrica'),
+        ('benzina'),
+        ('diesel'),
+        ('gpl'),
+        ('metano'),
+        ('ibrida'),
+        ('elettrica'),
     ]
     alimentazione = models.CharField(max_length=20, choices=ALIMENTAZIONE_CHOICES, default='benzina')
 
     CAMBIO_CHOICES = [
-        ('manuale', 'Manuale'),
-        ('automatico', 'Automatico'),
+        ('manuale'),
+        ('automatico'),
     ]
     cambio = models.CharField(max_length=20, choices=CAMBIO_CHOICES, default='manuale')
 
     CLASSE_CHOICES = [
-        ('euro4', 'Euro 4'),
-        ('euro5', 'Euro 5'),
-        ('euro6', 'Euro 6'),
-        ('elettrico', 'Elettrico/Zero'),
+        ('euro4'),
+        ('euro5'),
+        ('euro6'),
+        ('elettrico'),
     ]
     classe_ambientale = models.CharField(max_length=20, choices=CLASSE_CHOICES, default='euro6')
     # --- ECONOMIA (Per il grafico Margine e Vendite) ---
@@ -37,10 +37,10 @@ class Veicolo(models.Model):
 
     # --- STATO (Per sapere cosa mostrare in Inventario o Sales) ---
     STATO_CHOICES = [
-        ('disponibile', 'In Stock'),
-        ('venduto', 'Venduto'),
-        ('officina', 'In Preparazione'),
-        ('transito', 'In Transito'),
+        ('disponibile'),
+        ('venduto'),
+        ('officina'),
+        ('transito'),
     ]
     stato = models.CharField(max_length=20, choices=STATO_CHOICES, default='disponibile')
     n_proprietari = models.PositiveIntegerField(default=1)

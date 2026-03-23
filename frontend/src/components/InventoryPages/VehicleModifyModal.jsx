@@ -1,11 +1,11 @@
 import {useState} from 'react';
 import axios from "axios";const VehicleModifyModal = ({ selectedVehicle, setIsModifyModalOpen, setSelectedVehicle , setVeicoli}) => {
-    const [cambioModifica,setCambioModifica]=useState(selectedVehicle.cambio);
+    const [cambioModifica,setCambioModifica]=useState(selectedVehicle.cambio.toLowerCase());
     const [chilometriModifica,setChilometriModifica]=useState(selectedVehicle.km);
     const [prezzoListinoModifica,setPrezzoListinoModifica]=useState(selectedVehicle.prezzo_listino);
     const [statoModifica,setStatoModifica]=useState(selectedVehicle.stato);
     const [classe_ambientaleModifica,setClasse_ambientaleModifica]=useState(selectedVehicle.classe_ambientale);
-    const [alimentazioneModifica,setAlimentazioneModifica]=useState(selectedVehicle.alimentazione);
+    const [alimentazioneModifica,setAlimentazioneModifica]=useState(selectedVehicle.alimentazione.toLowerCase());
     const [n_proprietariModifica,setN_proprietariModifica]=useState(selectedVehicle.n_proprietari);
     const [targaModifica,setTargaModifica]=useState(selectedVehicle.targa);
     
@@ -67,9 +67,19 @@ import axios from "axios";const VehicleModifyModal = ({ selectedVehicle, setIsMo
             close(); // Chiudiamo il modal
         }
     } catch (error) {
-        console.error("Errore durante il salvataggio:", error.response?.data || error.message);
-        alert(error);
-        }
+    // Questa riga ti dirà esattamente QUALE campo Django sta rifiutando
+    console.error("DETTAGLI ERRORE DJANGO:", error.response?.data);
+    
+    if (error.response?.data) {
+        // Mostra l'errore specifico all'utente invece di un alert generico
+        const messaggi = Object.entries(error.response.data)
+            .map(([campo, errore]) => `${campo}: ${errore}`)
+            .join("\n");
+        alert("Errore di validazione:\n" + messaggi);
+    } else {
+        alert("Errore di connessione al server.");
+    }
+}
     }
     const close = () => {
         setIsModifyModalOpen(false);
@@ -121,16 +131,16 @@ import axios from "axios";const VehicleModifyModal = ({ selectedVehicle, setIsMo
                             <div className="col-md-3">
                                 <p className="text-muted mb-1">ALIMENTAZIONE</p>
                                 <span className={`fw-semibold`}>
-                                    {selectedVehicle.alimentazione.toUpperCase()}
+                                    {selectedVehicle.alimentazione}
                                 </span>
-                                <select value={alimentazioneModifica.toLowerCase()} onChange={handleAlimentazioneChange} className="form-select form-select-sm">
-                                    <option value="transito">
+                                <select value={alimentazioneModifica} onChange={handleAlimentazioneChange} className="form-select form-select-sm">
+                                    <option value="benzina">
                                         Benzina
                                     </option>
                                     <option value="officina">
                                         Diesel
                                     </option>
-                                    <option value="Metano">
+                                    <option value="metano">
                                         Metano
                                     </option>
                                     <option value="gpl">
@@ -162,7 +172,7 @@ import axios from "axios";const VehicleModifyModal = ({ selectedVehicle, setIsMo
                                 <span className={`fw-semibold`}>
                                     {selectedVehicle.cambio.toUpperCase()}
                                 </span>
-                                <select value={cambioModifica} onChange={handleCambioChange}className="form-select form-select-sm">
+                                <select value={cambioModifica.toLowerCase()} onChange={handleCambioChange}className="form-select form-select-sm">
                                     <option value="manuale">
                                         Manuale
                                     </option>
@@ -176,17 +186,17 @@ import axios from "axios";const VehicleModifyModal = ({ selectedVehicle, setIsMo
                                 <span className={`fw-semibold`}>
                                     {selectedVehicle.classe_ambientale}
                                 </span>
-                                <select disabled={alimentazioneModifica.toLowerCase()=="elettrica"} value={alimentazioneModifica.toLowerCase()=="elettrica" ?"elettrica":classe_ambientaleModifica} title={alimentazioneModifica=="elettrica" ?"Se è alimentata elettrica può essere solo di classe elettrica" : ""} onChange={handleClasse_AmbientaleChange}className="form-select form-select-sm">
-                                    <option value="euro4">
-                                        Euro 3
+                                <select disabled={alimentazioneModifica.toLowerCase()=="elettrica"} value={alimentazioneModifica.toLowerCase()=="elettrica" ?"elettrico":classe_ambientaleModifica} title={alimentazioneModifica=="elettrica" ?"Se è alimentata elettrica può essere solo di classe elettrica" : ""} onChange={handleClasse_AmbientaleChange}className="form-select form-select-sm">
+                                    <option value="Euro 4">
+                                        Euro 4
                                     </option>
-                                    <option value="euro5">
-                                        Euro4
-                                    </option>
-                                    <option value="euro6">
+                                    <option value="Euro 5">
                                         Euro 5
                                     </option>
-                                    <option value="elettrica">
+                                    <option value="Euro 6" >
+                                        Euro 6
+                                    </option>
+                                    <option value="elettrico">
                                         Zero
                                     </option>
                                 </select>

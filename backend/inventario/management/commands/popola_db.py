@@ -31,9 +31,9 @@ class Command(BaseCommand):
         }
 
         venditori = ['Marco', 'Laura', 'Giuseppe', 'Elena', 'Riccardo', 'Giulia']
-        alimentazioni = ['Benzina','Diesel','GPL','Metano','Ibrida','Elettrica']
-        cambi=['Manuale','Automatico']
-        classi=['Euro 4','Euro 5','Euro 6']
+        alimentazioni = ['benzina','diesel','gpl','metano','ibrida','elettrica']
+        cambi=['manuale','automatico']
+        classi=['euro4','euro5','euro6']
 
         self.stdout.write("Svuotamento database...")
 
@@ -67,8 +67,8 @@ class Command(BaseCommand):
             km_base = eta_auto * 15000
             km_reali = max(5000, km_base + random.randint(-10000, 20000)) if marca != 'Tesla' else random.randint(5000, 80000)
             alimentazione_casuale=random.choice(alimentazioni)
-            if alimentazione_casuale=="Elettrica":
-                classe="Zero"
+            if alimentazione_casuale=="elettrica":
+                classe="elettrico"
             else:
                 classe=random.choice(classi)
 
