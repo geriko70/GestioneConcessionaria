@@ -29,6 +29,15 @@ CORS_ALLOWED_ORIGINS = [
 # Se vuoi essere sicuro che funzioni subito con Vercel, aggiungi anche:
 CORS_ALLOW_ALL_ORIGINS = True # Usalo solo temporaneamente per il primo deploy!
 
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
 # Application definition
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
