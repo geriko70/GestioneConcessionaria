@@ -10,7 +10,7 @@ const StockTable = ({veicoli,setVeicoli}) => {
     const [filtroTarga, setFiltroTarga] = useState("");
     const [filtroMarca,setFiltroMarca]=useState("");
     const [filtroModello,setFiltroModello]=useState("");
-    const [ordineVeicoli,setOrdineVeicoli]=useState("");
+    const [ordineVeicoli,setOrdineVeicoli]=useState("prezzo_crescente");
     const [showSortMenu,setShowSortMenu]=useState("");
     const handleOpenDetails=(veicolo)=>{
         setSelectedVehicle(veicolo);
@@ -127,8 +127,6 @@ const StockTable = ({veicoli,setVeicoli}) => {
                         {/* Mostriamo il menu solo se showSortMenu è true */}
                         <div className={`dropdown-menu ${showSortMenu ? 'show' : ''}`} 
                             style={{ display: showSortMenu ? 'block' : 'none', right: 0, left: 'auto' }}>
-                            <button className="dropdown-item" onClick={() => { setOrdineVeicoli(""); setShowSortMenu(false); }}>Niente</button>
-                            <hr className="dropdown-divider" />
                             <button className="dropdown-item" onClick={() => { setOrdineVeicoli("prezzo_crescente"); setShowSortMenu(false); }}>Prezzo crescente</button>
                             <button className="dropdown-item" onClick={() => { setOrdineVeicoli("prezzo_decrescente"); setShowSortMenu(false); }}>Prezzo decrescente</button>
                             <hr className="dropdown-divider" />

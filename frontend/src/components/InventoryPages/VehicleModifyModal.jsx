@@ -1,11 +1,11 @@
 import {useState} from 'react';
 import axios from "axios";const VehicleModifyModal = ({ selectedVehicle, setIsModifyModalOpen, setSelectedVehicle , setVeicoli}) => {
-    const [cambioModifica,setCambioModifica]=useState(selectedVehicle.cambio.toLowerCase());
+    const [cambioModifica,setCambioModifica]=useState(selectedVehicle.cambio);
     const [chilometriModifica,setChilometriModifica]=useState(selectedVehicle.km);
     const [prezzoListinoModifica,setPrezzoListinoModifica]=useState(selectedVehicle.prezzo_listino);
     const [statoModifica,setStatoModifica]=useState(selectedVehicle.stato);
     const [classe_ambientaleModifica,setClasse_ambientaleModifica]=useState(selectedVehicle.classe_ambientale);
-    const [alimentazioneModifica,setAlimentazioneModifica]=useState(selectedVehicle.alimentazione.toLowerCase());
+    const [alimentazioneModifica,setAlimentazioneModifica]=useState(selectedVehicle.alimentazione);
     const [n_proprietariModifica,setN_proprietariModifica]=useState(selectedVehicle.n_proprietari);
     const [targaModifica,setTargaModifica]=useState(selectedVehicle.targa);
     
@@ -49,13 +49,13 @@ import axios from "axios";const VehicleModifyModal = ({ selectedVehicle, setIsMo
     const handleSubmit=async ()=>{
         let veicoloAggiornato={
             ...selectedVehicle,
-            km: chilometriModifica,
-            prezzo_listino:prezzoListinoModifica,
+            km: parseInt(chilometriModifica),
+            prezzo_listino:parseFloat(prezzoListinoModifica),
             stato: statoModifica,
             alimentazione:alimentazioneModifica,
             cambio: cambioModifica,
             classe_ambientale:classe_ambientaleModifica,
-            n_proprietari: n_proprietariModifica,
+            n_proprietari: parseInt(n_proprietariModifica),
             targa:targaModifica,
         };
         try{
@@ -131,7 +131,7 @@ import axios from "axios";const VehicleModifyModal = ({ selectedVehicle, setIsMo
                             <div className="col-md-3">
                                 <p className="text-muted mb-1">ALIMENTAZIONE</p>
                                 <span className={`fw-semibold`}>
-                                    {selectedVehicle.alimentazione}
+                                    {selectedVehicle.alimentazione.toUpperCase()}
                                 </span>
                                 <select value={alimentazioneModifica} onChange={handleAlimentazioneChange} className="form-select form-select-sm">
                                     <option value="benzina">
@@ -172,7 +172,7 @@ import axios from "axios";const VehicleModifyModal = ({ selectedVehicle, setIsMo
                                 <span className={`fw-semibold`}>
                                     {selectedVehicle.cambio.toUpperCase()}
                                 </span>
-                                <select value={cambioModifica.toLowerCase()} onChange={handleCambioChange}className="form-select form-select-sm">
+                                <select value={cambioModifica} onChange={handleCambioChange}className="form-select form-select-sm">
                                     <option value="manuale">
                                         Manuale
                                     </option>
@@ -184,16 +184,16 @@ import axios from "axios";const VehicleModifyModal = ({ selectedVehicle, setIsMo
                            <div className="col-md-3 border-end">
                                 <p className="text-muted mb-1">CLASSE AMBIENTALE</p>
                                 <span className={`fw-semibold`}>
-                                    {selectedVehicle.classe_ambientale}
+                                    {selectedVehicle.classe_ambientale.toUpperCase()}
                                 </span>
-                                <select disabled={alimentazioneModifica.toLowerCase()=="elettrica"} value={alimentazioneModifica.toLowerCase()=="elettrica" ?"elettrico":classe_ambientaleModifica} title={alimentazioneModifica=="elettrica" ?"Se è alimentata elettrica può essere solo di classe elettrica" : ""} onChange={handleClasse_AmbientaleChange}className="form-select form-select-sm">
-                                    <option value="Euro 4">
+                                <select disabled={alimentazioneModifica=="elettrica"} value={alimentazioneModifica=="elettrica" ?"elettrico":classe_ambientaleModifica} title={alimentazioneModifica=="elettrica" ?"Se è alimentata elettrica può essere solo di classe elettrica" : ""} onChange={handleClasse_AmbientaleChange}className="form-select form-select-sm">
+                                    <option value="euro4">
                                         Euro 4
                                     </option>
-                                    <option value="Euro 5">
+                                    <option value="euro5">
                                         Euro 5
                                     </option>
-                                    <option value="Euro 6" >
+                                    <option value="euro6" >
                                         Euro 6
                                     </option>
                                     <option value="elettrico">
