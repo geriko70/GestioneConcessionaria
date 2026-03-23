@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
-
+from inventario.views import VeicoloUpdateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('inventario.urls')), # Tutte le API di inventario saranno sotto /api/

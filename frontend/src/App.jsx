@@ -30,7 +30,7 @@ function App() {
       <Sidebar setActiveTab={setActiveTab} activeTab={activeTab}/>
       <main className="flex-grow-1 bg-light overflow-auto">
         {activeTab === 'dashboard' && <Dashboard veicoli={veicoli} vendite={vendite}/>}
-        {activeTab === 'inventory' && <Inventory veicoli={veicoli} vendite={vendite}/>}
+        {activeTab === 'inventory' && <Inventory veicoli={veicoli} vendite={vendite} setVeicoli={setVeicoli}/>}
       </main>
     </div>
   );

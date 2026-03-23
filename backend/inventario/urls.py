@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import VeicoloListCreateView, VenditaListCreateView
+from .views import VeicoloListCreateView, VenditaListCreateView,VeicoloUpdateView
 
 urlpatterns = [
     # Quando React cercherà i veicoli
@@ -7,4 +7,6 @@ urlpatterns = [
     
     # Quando React cercherà le vendite per i tuoi grafici
     path('vendite/', VenditaListCreateView.as_view(), name='vendita-list'),
+
+    path('veicoli/<int:pk>/', VeicoloUpdateView.as_view(), name='vendita-update'),
 ]

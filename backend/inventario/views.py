@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics
+from rest_framework.generics import RetrieveUpdateAPIView
 from .serializer import VeicoloSerializer, VenditaSerializer
 from .models import Veicolo, Vendita
 
@@ -9,3 +10,8 @@ class VeicoloListCreateView(generics.ListCreateAPIView):
 class VenditaListCreateView(generics.ListCreateAPIView):
     queryset = Vendita.objects.all()
     serializer_class = VenditaSerializer
+
+class VeicoloUpdateView(RetrieveUpdateAPIView):
+    queryset = Veicolo.objects.all()
+    serializer_class = VeicoloSerializer
+

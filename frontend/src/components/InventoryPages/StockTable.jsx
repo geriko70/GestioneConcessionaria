@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./StockTable.css"
 import VehicleDetailModal from "./VehicleDetailModal";
 import VehicleModifyModal from "./VehicleModifyModal";
-const StockTable = ({veicoli}) => {
+const StockTable = ({veicoli,setVeicoli}) => {
     const [selectedVehicle,setSelectedVehicle]=useState(null);
     const [isVeichleModalOpen,setIsVehicleModalOpen]=useState(false);
     const [isModifyModalOpen,setIsModifyModalOpen]=useState(false);
@@ -190,6 +190,8 @@ const StockTable = ({veicoli}) => {
             setSelectedVehicle={setSelectedVehicle} 
             selectedVehicle={selectedVehicle} 
             setIsModifyModalOpen={setIsModifyModalOpen}
+            setVeicoli={setVeicoli}
+            veicoli={veicoli}
             />
         }  
         </div>
