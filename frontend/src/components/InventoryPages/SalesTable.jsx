@@ -17,7 +17,7 @@ const SalesTable = ({vendite}) => {
                     <th style={{ width: '20%' }} scope="col">Prezzo Vendita</th>
                     <th style={{ width: '20%' }} scope="col">Data</th>
                     <th style={{ width: '20%' }} scope="col">Margine</th>
-                    <th style={{ width: '20%' }}scope="col">Azioni</th>
+                    <th style={{ width: '20%' }} scope="col">Azioni</th>
                 </tr>
             </thead>
             <tbody>

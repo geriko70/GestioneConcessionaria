@@ -3,7 +3,7 @@ import { useState } from 'react';
 import StockTable from './InventoryPages/StockTable';
 import SalesTable from './InventoryPages/SalesTable';
 import './Inventory.css';
-const Inventory = ({veicoli,vendite,setVeicoli}) => {
+const Inventory = ({veicoli,vendite,setVeicoli,setVendite}) => {
     const [activeTab, setActiveTab] = useState('stock');
     return (
         <div className='container-fluid'>
@@ -18,8 +18,8 @@ const Inventory = ({veicoli,vendite,setVeicoli}) => {
                 </nav>
             </div>
             <div className='row'>
-                {activeTab === 'stock' && <div className='col-12'><StockTable veicoli={veicoli} vendite={vendite}/></div>}
-                {activeTab === 'sales' && <div className='col-12'><SalesTable veicoli={veicoli} vendite={vendite} setVeicoli={setVeicoli}/></div>}
+                {activeTab === 'stock' && <div className='col-12'><StockTable veicoli={veicoli} vendite={vendite} setVeicoli={setVeicoli} setVendite={setVendite}/></div>}
+                {activeTab === 'sales' && <div className='col-12'><SalesTable veicoli={veicoli} vendite={vendite} setVendite={setVendite}/></div>}
             </div>
                 
             

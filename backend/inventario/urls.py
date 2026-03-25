@@ -8,5 +8,5 @@ urlpatterns = [
     # Quando React cercherà le vendite per i tuoi grafici
     path('vendite/', VenditaListCreateView.as_view(), name='vendita-list'),
 
-    path('veicoli/<int:pk>/', VeicoloUpdateView.as_view(), name='vendita-update'),
+    path('veicoli/<int:pk>/', VeicoloUpdateView.as_view(), name='veicolo-update'),
 ]

@@ -2,19 +2,31 @@ import { useState } from "react";
 import "./StockTable.css"
 import VehicleDetailModal from "./VehicleDetailModal";
 import VehicleModifyModal from "./VehicleModifyModal";
-const StockTable = ({veicoli,setVeicoli}) => {
+import VehicleAddModal from "./VehicleAddModal";
+import VehicleSaleModal from "./VehicleSaleModal";
+const StockTable = ({veicoli,setVeicoli,setVendite}) => {
     const [selectedVehicle,setSelectedVehicle]=useState(null);
     const [isVeichleModalOpen,setIsVehicleModalOpen]=useState(false);
     const [isModifyModalOpen,setIsModifyModalOpen]=useState(false);
+    const [isAddModalOpen,setIsAddModalOpen]=useState(false);
+    const [isSaleModalOpen,setIsSaleModalOpen]=useState(false);
+
 
     const [filtroTarga, setFiltroTarga] = useState("");
     const [filtroMarca,setFiltroMarca]=useState("");
     const [filtroModello,setFiltroModello]=useState("");
     const [ordineVeicoli,setOrdineVeicoli]=useState("prezzo_crescente");
     const [showSortMenu,setShowSortMenu]=useState("");
+    const handleOpenAdd=()=>{
+        setIsAddModalOpen(true);
+    }
     const handleOpenDetails=(veicolo)=>{
         setSelectedVehicle(veicolo);
         setIsVehicleModalOpen(true);
+    }
+    const handleOpenSale=(veicolo)=>{
+        setSelectedVehicle(veicolo);
+        setIsSaleModalOpen(true);
     }
     const handleOpenModify=(veicolo)=>{
         setSelectedVehicle(veicolo);
@@ -138,7 +150,7 @@ const StockTable = ({veicoli,setVeicoli}) => {
                         <button className="btn btn-sm btn-secondary "  onClick={handleFilterClear}>
                             Ripristina filtri
                         </button>
-                        <button className="btn btn-sm btn-success"  onClick={handleFilterClear}>
+                        <button className="btn btn-sm btn-success"  onClick={handleOpenAdd}>
                             Aggiungi 
                         </button>
                     </div>
@@ -161,7 +173,7 @@ const StockTable = ({veicoli,setVeicoli}) => {
                     <td className=" text-center ">
                         <div className="btn-group gap-4">
                             <button onClick={() => handleOpenDetails(veicolo)} className="sell-button btn btn-sm btn-info">Info</button>
-                            <button className="btn btn-sm btn-success">Vendi</button>
+                            <button onClick={() => handleOpenSale(veicolo)} className="btn btn-sm btn-success">Vendi</button>
                             <button onClick={() => handleOpenModify(veicolo)}className="btn btn-sm btn-warning">Modifica</button>
                         </div>
                     </td>
@@ -189,9 +201,23 @@ const StockTable = ({veicoli,setVeicoli}) => {
             selectedVehicle={selectedVehicle} 
             setIsModifyModalOpen={setIsModifyModalOpen}
             setVeicoli={setVeicoli}
-            veicoli={veicoli}
             />
         }  
+        {isAddModalOpen===true && 
+            <VehicleAddModal 
+            setIsAddModalOpen={setIsAddModalOpen}
+            setVeicoli={setVeicoli}
+            />
+        }  
+        {isSaleModalOpen===true && 
+            <VehicleSaleModal 
+            setIsSaleModalOpen={setIsSaleModalOpen}
+            setVendite={setVendite}
+            setVeicoli={setVeicoli}
+            setSelectedVehicle={setSelectedVehicle} 
+            selectedVehicle={selectedVehicle}
+            />
+        } 
         </div>
     );
 }

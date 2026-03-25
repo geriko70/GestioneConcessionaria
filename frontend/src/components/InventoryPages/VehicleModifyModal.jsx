@@ -67,11 +67,8 @@ import axios from "axios";const VehicleModifyModal = ({ selectedVehicle, setIsMo
             close(); // Chiudiamo il modal
         }
     } catch (error) {
-    // Questa riga ti dirà esattamente QUALE campo Django sta rifiutando
-    console.error("DETTAGLI ERRORE DJANGO:", error.response?.data);
-    
+    console.error(error, error.response?.data);
     if (error.response?.data) {
-        // Mostra l'errore specifico all'utente invece di un alert generico
         const messaggi = Object.entries(error.response.data)
             .map(([campo, errore]) => `${campo}: ${errore}`)
             .join("\n");
