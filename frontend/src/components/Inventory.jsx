@@ -19,7 +19,7 @@ const Inventory = ({veicoli,vendite,setVeicoli,setVendite}) => {
             </div>
             <div className='row'>
                 {activeTab === 'stock' && <div className='col-12'><StockTable veicoli={veicoli} vendite={vendite} setVeicoli={setVeicoli} setVendite={setVendite}/></div>}
-                {activeTab === 'sales' && <div className='col-12'><SalesTable veicoli={veicoli} vendite={vendite} setVendite={setVendite}/></div>}
+                {activeTab === 'sales' && <div className='col-12'><SalesTable veicoli={veicoli} vendite={vendite} setVendite={setVendite} setVeicoli={setVeicoli}/></div>}
             </div>
                 
             

@@ -131,23 +131,22 @@ const StockTable = ({veicoli,setVeicoli,setVendite}) => {
                 </th>
                 <th className="text-center" style={{width:"26%"}}>
                     <div className="btn-group gap-2">
-                    <div className="dropdown">
-                        <button className="btn btn-sm btn-primary dropdown-toggle" onClick={() => setShowSortMenu(!showSortMenu)}>
-                            Ordina per
-                        </button>
-                        
-                        {/* Mostriamo il menu solo se showSortMenu è true */}
-                        <div className={`dropdown-menu ${showSortMenu ? 'show' : ''}`} 
-                            style={{ display: showSortMenu ? 'block' : 'none', right: 0, left: 'auto' }}>
-                            <button className="dropdown-item" onClick={() => { setOrdineVeicoli("prezzo_crescente"); setShowSortMenu(false); }}>Prezzo crescente</button>
-                            <button className="dropdown-item" onClick={() => { setOrdineVeicoli("prezzo_decrescente"); setShowSortMenu(false); }}>Prezzo decrescente</button>
-                            <hr className="dropdown-divider" />
-                            <button className="dropdown-item" onClick={() => { setOrdineVeicoli("kilometraggio_crescente"); setShowSortMenu(false); }}>Km crescente</button>
-                            <button className="dropdown-item" onClick={() => { setOrdineVeicoli("kilometraggio_decrescente"); setShowSortMenu(false); }}>Km decrescente</button>
+                        <div className="dropdown">
+                            <button className="btn btn-sm btn-primary dropdown-toggle" onClick={() => setShowSortMenu(!showSortMenu)}>
+                                Ordina per
+                            </button>
+                            
+                            {/* Mostriamo il menu solo se showSortMenu è true */}
+                            <div className={`dropdown-menu ${showSortMenu ? 'show' : ''}`} 
+                                style={{ display: showSortMenu ? 'block' : 'none', right: 0, left: 'auto' }}>
+                                <button className="dropdown-item" onClick={() => { setOrdineVeicoli("prezzo_crescente"); setShowSortMenu(false); }}>Prezzo crescente</button>
+                                <button className="dropdown-item" onClick={() => { setOrdineVeicoli("prezzo_decrescente"); setShowSortMenu(false); }}>Prezzo decrescente</button>
+                                <hr className="dropdown-divider" />
+                                <button className="dropdown-item" onClick={() => { setOrdineVeicoli("kilometraggio_crescente"); setShowSortMenu(false); }}>Km crescente</button>
+                                <button className="dropdown-item" onClick={() => { setOrdineVeicoli("kilometraggio_decrescente"); setShowSortMenu(false); }}>Km decrescente</button>
+                            </div>
                         </div>
-                    </div>
-                
-                        <button className="btn btn-sm btn-secondary "  onClick={handleFilterClear}>
+                    <button className="btn btn-sm btn-secondary "  onClick={handleFilterClear}>
                             Ripristina filtri
                         </button>
                         <button className="btn btn-sm btn-success"  onClick={handleOpenAdd}>
