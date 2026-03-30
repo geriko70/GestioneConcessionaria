@@ -13,6 +13,6 @@ class VenditaListCreateView(generics.ListCreateAPIView):
 class VeicoloUpdateView(RetrieveUpdateAPIView):
     queryset = Veicolo.objects.all()
     serializer_class = VeicoloSerializer
-class VenditaDeleteView(generics.RetrieveUpdateDestroyView):
+class VenditaDeleteView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Vendita.objects.all()
     serializer_class = VenditaSerializer
