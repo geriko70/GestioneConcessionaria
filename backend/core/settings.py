@@ -5,6 +5,7 @@ Django settings for core project.
 from pathlib import Path
 import os
 import dj_database_url  # Aggiunto per gestire l'URL del database di Render
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,12 +39,21 @@ CORS_ALLOW_METHODS = [
     "PUT",
 ]
 
-# Application definition
-#REST_FRAMEWORK = {
-#    'DEFAULT_AUTHENTICATION_CLASSES': (
-#        'rest_framework_simplejwt.authentication.JWTAuthentication',
-#    )
-#}
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated', # Blocca tutto di default
+    ],
+}
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1), # Il login dura 1 giorno
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    'ROTATE_REFRESH_TOKENS': False,
+    'ALGORITHM': 'HS256',
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
 
 INSTALLED_APPS = [
     'django.contrib.admin',
