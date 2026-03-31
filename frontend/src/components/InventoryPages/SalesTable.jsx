@@ -54,29 +54,29 @@ const SalesTable = ({vendite,setVeicoli,setVendite}) => {
         <table className="table table-striped">
             <thead>
                 <tr>
-                    <th style={{width:"20%"}}>
+                    <th >
                         <div className="d-flex gap-2">
                             <span className="gap">Targa</span>
                             <input value={filtroTarga} placeholder="Cerca Targa" onChange={handleTargaChange}className="card form-select-sm" type="search"></input>
                         </div>
                     </th>
 
-                    <th style={{ width: '20%' }}>
+                    <th >
                         <div className="d-flex">Prezzo Vendita</div>
                     </th>
 
-                    <th style={{ width: '20%' }} >
+                    <th  >
                         <div className="d-flex gap-2"><span>Data</span>
                         <input type="date" value={filtroData} onChange={handleDataChange} className="form-control form-control-sm " style={{ width: '40%' }}/>
                         </div>
                     </th>
                     
-                    <th style={{ width: '20%' }} >
+                    <th >
                         <div className="d-flex">Margine</div>
                     </th>
                     
-                    <th style={{width:"20%"}} className="">
-                        <div className="btn-group gap-2">
+                    <th  className="text-center">
+                        <div className="btn-group gap-2 ">
                             <button className="btn btn-sm btn-primary dropdown-toggle" onClick={() => setShowSortMenu(!showSortMenu)}>
                                     Ordina per
                                 </button>
@@ -109,10 +109,9 @@ const SalesTable = ({vendite,setVeicoli,setVendite}) => {
                     <td >€ {(Number)(vendita.prezzo_vendita_effettivo)}</td>
                     <td>{vendita.data_vendita}</td>
                     <td>€ {vendita.margine}</td>
-                    <td className="text-start">
+                    <td className="text-center">
                         <div className="btn-group gap-4">
                             <button onClick={() => handleOpenDetails(vendita)} className="sell-button btn btn-sm btn-info">Info</button>
-                            <button className="modify-button btn btn-sm btn-warning">Modifica</button>
                             <button onClick={() => handleOpenDelete(vendita)} className="delete-button btn btn-sm btn-danger">Elimina</button>
                         </div>
                     </td>
