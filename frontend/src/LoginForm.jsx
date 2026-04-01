@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const LoginForm = ({ onLoginSuccess }) => {
+const LoginForm = ({ loginEffettuato }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -22,7 +22,7 @@ const LoginForm = ({ onLoginSuccess }) => {
             if (response.status === 200) {
                 const token = response.data.access;
                 // Comunichiamo ad App.jsx che il login è riuscito
-                onLoginSuccess(token);
+                loginEffettuato(token);
             }
         } catch (err) {
             console.error("Errore Login:", err.response?.data);
@@ -83,7 +83,7 @@ const LoginForm = ({ onLoginSuccess }) => {
                     </form>
                 </div>
                 <div className="card-footer bg-light text-center py-3 border-0" style={{ borderBottomLeftRadius: '15px', borderBottomRightRadius: '15px' }}>
-                    <small className="text-muted">© 2024 Gestione Concessionaria</small>
+                    <small className="text-muted">© 2026 Gestione Concessionaria</small>
                 </div>
             </div>
         </div>

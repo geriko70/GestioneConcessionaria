@@ -1,6 +1,6 @@
 import React from 'react';
 import './Sidebar.css';
-const Sidebar = ({setActiveTab, activeTab}) => {
+const Sidebar = ({setActiveTab, activeTab,logout}) => {
   return (
     <div className="d-flex flex-column p-3 text-white bg-dark" style={{ width: '30vh', height: '100vh' }}>
       <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
@@ -29,12 +29,8 @@ const Sidebar = ({setActiveTab, activeTab}) => {
           </a>
         </li>
       </ul>
-      <hr />
-      <div className="dropdown">
-        <span className="d-flex align-items-center text-white text-decoration-none">
-          <strong>Admin Login</strong>
-        </span>
-      </div>
+      <hr/>
+        <button onClick={logout} className='btn btn-danger'>Log Out</button>
     </div>
   );
 };
