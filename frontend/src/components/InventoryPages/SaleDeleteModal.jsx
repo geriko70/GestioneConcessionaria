@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-const SaleDeleteModal = ({ selectedSale, setIsDeleteModalOpen, setSelectedSale, setVendite, setVeicoli }) => {
+const SaleDeleteModal = ({ selectedSale, setIsDeleteModalOpen, setSelectedSale, setVendite, setVeicoli,token,logout }) => {
     if (!selectedSale) return null;
 
     const close = () => {
@@ -11,30 +11,37 @@ const SaleDeleteModal = ({ selectedSale, setIsDeleteModalOpen, setSelectedSale, 
 
     const handleDelete = async () => {
         try {
-            // 1. Eliminiamo la vendita dal DB
-            const resDelete = await axios.delete(`https://gestioneconcessionaria.onrender.com/api/vendite/${selectedSale.id}/`);
+            const config={
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            }
+            const resDelete = await axios.delete(`https://gestioneconcessionaria.onrender.com/api/vendite/${selectedSale.id}/`,config);
             
             if (resDelete.status === 204 || resDelete.status === 200) {
                 // 2. RIPRISTINO STATO VEICOLO: Riportiamo l'auto a 'disponibile'
                 const resPatch = await axios.patch(
                     `https://gestioneconcessionaria.onrender.com/api/veicoli/${selectedSale.veicolo.id}/`, 
-                    { stato: "disponibile" }
+                    { stato: "disponibile" },config
                 );
 
-                if (resPatch.status === 200) {
                     setVendite(prev => prev.filter(v => v.id !== selectedSale.id));
                     setVeicoli(prev => prev.map(v => v.id === selectedSale.veicolo.id ? resPatch.data : v));
                     
                     alert("Vendita annullata con successo. Il veicolo è tornato disponibile.");
                     close();
-                }
             }
         } catch (error) {
+            if (error.response?.status === 401) {
+                alert("Sessione scaduta, effettua di nuovo il login.");
+                logout(); // Forza il ritorno al login
+            } else {
             console.error("Errore durante l'eliminazione:", error.response?.data);
             alert("Errore tecnico durante l'annullamento della vendita.");
         }
     };
-
+}
     return (
         <div className="modal d-block" style={{ backgroundColor: 'rgba(0,0,0,0.6)', zIndex: 1070 }}>
             <div className="modal-dialog modal-md modal-dialog-centered"> 

@@ -1,4 +1,4 @@
-const SaleDetailModal = ({selectedSale, setIsDetailModalOpen, setSelectedSale }) => {
+const SaleDetailModal = ({selectedSale, setIsDetailModalOpen, setSelectedSale}) => {
     if (!selectedSale) return null;
 
     const close = () => {

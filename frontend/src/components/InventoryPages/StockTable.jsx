@@ -4,7 +4,8 @@ import VehicleDetailModal from "./VehicleDetailModal";
 import VehicleModifyModal from "./VehicleModifyModal";
 import VehicleAddModal from "./VehicleAddModal";
 import VehicleSaleModal from "./VehicleSaleModal";
-const StockTable = ({veicoli,setVeicoli,setVendite}) => {
+const StockTable = ({veicoli,setVeicoli,setVendite,token,logout}) => {
+
     const [selectedVehicle,setSelectedVehicle]=useState(null);
     const [isVeichleModalOpen,setIsVehicleModalOpen]=useState(false);
     const [isModifyModalOpen,setIsModifyModalOpen]=useState(false);
@@ -17,6 +18,7 @@ const StockTable = ({veicoli,setVeicoli,setVendite}) => {
     const [filtroModello,setFiltroModello]=useState("");
     const [ordineVeicoli,setOrdineVeicoli]=useState("prezzo_crescente");
     const [showSortMenu,setShowSortMenu]=useState("");
+
     const handleOpenAdd=()=>{
         setIsAddModalOpen(true);
     }
@@ -192,6 +194,8 @@ const StockTable = ({veicoli,setVeicoli,setVendite}) => {
             setSelectedVehicle={setSelectedVehicle} 
             selectedVehicle={selectedVehicle} 
             setIsVehicleModalOpen={setIsVehicleModalOpen}
+            token={token}
+            logout={logout}
             />
         }
         {isModifyModalOpen===true && 
@@ -200,12 +204,16 @@ const StockTable = ({veicoli,setVeicoli,setVendite}) => {
             selectedVehicle={selectedVehicle} 
             setIsModifyModalOpen={setIsModifyModalOpen}
             setVeicoli={setVeicoli}
+            token={token}
+            logout={logout}
             />
         }  
         {isAddModalOpen===true && 
             <VehicleAddModal 
             setIsAddModalOpen={setIsAddModalOpen}
             setVeicoli={setVeicoli}
+            token={token}
+            logout={logout}
             />
         }  
         {isSaleModalOpen===true && 
@@ -215,6 +223,8 @@ const StockTable = ({veicoli,setVeicoli,setVendite}) => {
             setVeicoli={setVeicoli}
             setSelectedVehicle={setSelectedVehicle} 
             selectedVehicle={selectedVehicle}
+            token={token}
+            logout={logout}
             />
         } 
         </div>

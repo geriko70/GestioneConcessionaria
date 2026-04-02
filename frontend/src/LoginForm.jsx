@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const LoginForm = ({ loginEffettuato }) => {
+    const [eyePassword, setEyePassword] = useState(false);
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -22,6 +24,7 @@ const LoginForm = ({ loginEffettuato }) => {
             if (response.status === 200) {
                 const token = response.data.access;
                 // Comunichiamo ad App.jsx che il login è riuscito
+                localStorage.setItem('username_loggato', username);
                 loginEffettuato(token);
             }
         } catch (err) {
@@ -56,13 +59,21 @@ const LoginForm = ({ loginEffettuato }) => {
                         <div className="mb-4">
                             <label className="form-label small fw-bold">Password</label>
                             <input 
-                                type="text" 
+                                type={eyePassword ? "text" : "password"}
                                 className="form-control form-control-lg fs-6" 
                                 placeholder="********"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required 
                             />
+                                <input type="checkbox" className="form-check-input mt-2" id="showPasswordCheck" onChange={() => setEyePassword(!eyePassword)}/>
+                                <label 
+                                className="form-check-label text-dark fw-bold small mt-1 ms-1" 
+                                htmlFor="showPasswordCheck"
+                                style={{ cursor: 'pointer' }} // Rende la scritta cliccabile come un tasto
+                                >
+                                Mostra password
+                            </label>
                         </div>
 
                         {error && (

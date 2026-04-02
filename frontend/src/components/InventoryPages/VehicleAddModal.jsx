@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import axios from "axios";const VehicleAddModal = ({setIsAddModalOpen , setVeicoli}) => {
+import axios from "axios";const VehicleAddModal = ({setIsAddModalOpen , setVeicoli,token,logout}) => {
 const [marcaNuovo, setMarca] = useState("");
 const [modelloNuovo, setModello] = useState("");
 const [annoNuovo, setAnno] = useState("");
@@ -39,7 +39,12 @@ const handleNProprietariChange = (e) => {
 };
 
 // Gestione Select
-const handleAlimentazioneChange = (e) => setAlimentazione(e.target.value);
+const handleAlimentazioneChange = (e) => {
+    setAlimentazione(e.target.value);
+    if (e.target.value === "elettrica") {
+        setClasse_ambientale("elettrico");
+    }
+}
 const handleCambioChange = (e) => setCambio(e.target.value);
 const handleClasseAmbientaleChange = (e) => setClasse_ambientale(e.target.value);
 const handleStatoChange = (e) => setStato(e.target.value);
@@ -60,34 +65,31 @@ const handleStatoChange = (e) => setStato(e.target.value);
         stato: statoNuovo,
         n_proprietari: parseInt(n_proprietariNuovo),
     };
-
+    
     try {
+        const config = {
+            headers: {
+            'Authorization': `Bearer ${token}`, // 'token' arriva dalle props (Drilling)
+            'Content-Type': 'application/json'  // Specifichiamo che mandiamo dati JSON
+            }
+        };
         // 2. POST all'URL della lista (senza ID!)
         const response = await axios.post(
             `https://gestioneconcessionaria.onrender.com/api/veicoli/`, 
-            veicoloNuovo
+            veicoloNuovo,config
         );
-
-        // 3. Status 201 significa "Created"
-        if (response.status === 201) {
-            const veicoloCreato = response.data;
-            
-            // 4. Aggiungiamo il nuovo veicolo alla lista esistente (senza sovrascrivere)
-            setVeicoli(prev => [...prev, veicoloCreato]);
-            
-            alert("Nuovo veicolo aggiunto con successo!");
-            close(); // Chiudiamo il modal di aggiunta
-        }
-    } catch (error) {
-        console.error("Errore dettagliato:", error.response?.data);
         
-        if (error.response?.data) {
-            const messaggi = Object.entries(error.response.data)
-                .map(([campo, errore]) => `${campo}: ${errore}`)
-                .join("\n");
-            alert("INSERISCI TUTTI I CAMPI:\n" + messaggi);
+            const veicoloCreato = response.data;
+            setVeicoli(prev => [...prev, veicoloCreato]);
+            alert("Nuovo veicolo aggiunto con successo!");
+            close(); 
+    } catch (error) {
+        if (error.response?.status === 401) {
+            alert("Sessione scaduta, effettua di nuovo il login.");
+            logout(); // Forza il ritorno al login
         } else {
-            alert("Errore di connessione o server non raggiungibile.");
+            console.error("Errore durante il salvataggio:", error.response?.data);
+            alert("Errore: controlla i campi o la connessione.");
         }
     }
 };
@@ -212,7 +214,7 @@ const handleStatoChange = (e) => setStato(e.target.value);
                                         Euro 6
                                     </option>
                                     <option value="elettrico">
-                                        Zero
+                                        Elettrico
                                     </option>
                                 </select>
                             </div>

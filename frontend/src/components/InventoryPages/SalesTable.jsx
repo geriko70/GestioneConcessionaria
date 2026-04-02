@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SaleDetailModal from "./SaleDetailModal";
 import SaleDeleteModal from "./SaleDeleteModal";
-const SalesTable = ({vendite,setVeicoli,setVendite}) => {
+const SalesTable = ({vendite,setVeicoli,setVendite,token,logout}) => {
     const [selectedSale,setSelectedSale]=useState(null);
     const [isDetailModalOpen,setIsDetailModalOpen]=useState(false);
     const [isDeleteModalOpen,setIsDeleteModalOpen]=useState(false);
@@ -129,6 +129,8 @@ const SalesTable = ({vendite,setVeicoli,setVendite}) => {
             setSelectedSale={setSelectedSale}
             selectedSale={selectedSale} 
             setIsDetailModalOpen={setIsDetailModalOpen}
+            token={token}
+            logout={logout}
             />
         } 
         {isDeleteModalOpen===true && 
@@ -138,6 +140,8 @@ const SalesTable = ({vendite,setVeicoli,setVendite}) => {
             setIsDeleteModalOpen={setIsDeleteModalOpen}
             setVendite={setVendite}
             setVeicoli={setVeicoli}
+            token={token}
+            logout={logout}
             />
         }   
         </div>

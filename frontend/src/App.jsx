@@ -51,8 +51,8 @@ function App() {
       <div className="d-flex vw-100 vh-100">
         <Sidebar setActiveTab={setActiveTab} activeTab={activeTab} logout={logout}/>
         <main className="flex-grow-1 bg-light overflow-auto">
-          {activeTab === 'dashboard' && <Dashboard veicoli={veicoli} vendite={vendite} />}
-          {activeTab === 'inventory' && <Inventory veicoli={veicoli} vendite={vendite} setVeicoli={setVeicoli}  setVendite={setVendite}/>}
+          {activeTab === 'dashboard' && <Dashboard veicoli={veicoli} vendite={vendite}/>}
+          {activeTab === 'inventory' && <Inventory veicoli={veicoli} vendite={vendite} setVeicoli={setVeicoli}  setVendite={setVendite} token={token} logout={logout}/>}
         </main>
       </div>
     );

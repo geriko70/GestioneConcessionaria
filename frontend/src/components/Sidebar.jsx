@@ -1,6 +1,7 @@
 import React from 'react';
 import './Sidebar.css';
 const Sidebar = ({setActiveTab, activeTab,logout}) => {
+  const usernameLoggato = localStorage.getItem('username_loggato');
   return (
     <div className="d-flex flex-column p-3 text-white bg-dark" style={{ width: '30vh', height: '100vh' }}>
       <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
@@ -29,6 +30,7 @@ const Sidebar = ({setActiveTab, activeTab,logout}) => {
           </a>
         </li>
       </ul>
+      <h2 className=' fw-bold text-center text-success'>{usernameLoggato}</h2>
       <hr/>
         <button onClick={logout} className='btn btn-danger'>Log Out</button>
     </div>

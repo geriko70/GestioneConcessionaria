@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-const VehicleSaleModal = ({ selectedVehicle, setIsSaleModalOpen, setSelectedVehicle , setVendite ,setVeicoli}) => {
+const VehicleSaleModal = ({ selectedVehicle, setIsSaleModalOpen, setSelectedVehicle , setVendite ,setVeicoli,token,logout}) => {
     const [prezzo_vendita_effettivoNuovo,setPrezzo_vendita_effettivoNuovo]=useState(selectedVehicle.prezzo_listino);
     const handlePrezzoVenditaEffettivoChange=(e)=>{
         setPrezzo_vendita_effettivoNuovo(e.target.value);
@@ -19,34 +19,34 @@ const VehicleSaleModal = ({ selectedVehicle, setIsSaleModalOpen, setSelectedVehi
         }
         const veicoloDaAggiornare = { stato: "venduto" };
         try {
-        let response= await axios.patch(
-            `https://gestioneconcessionaria.onrender.com/api/veicoli/${selectedVehicle.id}/`,veicoloDaAggiornare);
-            if (response.status === 200) {
-            veicoloAggiornato=response.data;
-            setVeicoli(prev=>prev.map(v=>v.id==selectedVehicle.id ? veicoloAggiornato : v));             // Chiudiamo il modal
+            const config = {
+            headers: {
+            'Authorization': `Bearer ${token}`, // 'token' arriva dalle props (Drilling)
+            'Content-Type': 'application/json'  // Specifichiamo che mandiamo dati JSON
             }
-        response = await axios.post(
-            `https://gestioneconcessionaria.onrender.com/api/vendite/`,venditaNuova);
-        // 3. Status 201 significa "Created"
-        if (response.status === 201) {
-            const venditaCreata = response.data;
-            // 4. Aggiungiamo il nuovo veicolo alla lista esistente (senza sovrascrivere)
-            setVendite(prev => [...prev, venditaCreata]);
-            alert("Nuova vendita aggiunta con successo!");
-            close(); // Chiudiamo il modal di aggiunta
-        }
-    }catch (error) {
-    console.error(error, error.response?.data);
-    if (error.response?.data) {
-        const messaggi = Object.entries(error.response.data)
-            .map(([campo, errore]) => `${campo}: ${errore}`)
-            .join("\n");
-        alert("Errore di validazione:\n" + messaggi);
-    } else {
-        alert("Errore di connessione al server.");
-    }
+            }
+            let response= await axios.patch(
+                `https://gestioneconcessionaria.onrender.com/api/veicoli/${selectedVehicle.id}/`,veicoloDaAggiornare,config);
+                if (response.status === 200) {
+                veicoloAggiornato=response.data;
+                setVeicoli(prev=>prev.map(v=>v.id==selectedVehicle.id ? veicoloAggiornato : v));             // Chiudiamo il modal
+                }
+            response = await axios.post(
+                `https://gestioneconcessionaria.onrender.com/api/vendite/`,venditaNuova,config);
+                const venditaCreata = response.data;
+                // 4. Aggiungiamo il nuovo veicolo alla lista esistente (senza sovrascrivere)
+                setVendite(prev => [...prev, venditaCreata]);
+                alert("Nuova vendita aggiunta con successo!");
+                close(); // Chiudiamo il modal di aggiunta
+        }catch (error) {
+            if (error.response?.status === 401) {
+                alert("Sessione scaduta, effettua di nuovo il login.");
+                logout(); // Forza il ritorno al login
+            } else {
+                alert("Errore di connessione al server.");
+            }
 
-    }
+        }
 }
     const close = () => {
         setIsSaleModalOpen(false);

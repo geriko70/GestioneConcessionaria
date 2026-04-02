@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import axios from "axios";const VehicleModifyModal = ({ selectedVehicle, setIsModifyModalOpen, setSelectedVehicle , setVeicoli}) => {
+import axios from "axios";const VehicleModifyModal = ({ selectedVehicle, setIsModifyModalOpen, setSelectedVehicle , setVeicoli,token,logout}) => {
     const [cambioModifica,setCambioModifica]=useState(selectedVehicle.cambio);
     const [chilometriModifica,setChilometriModifica]=useState(selectedVehicle.km);
     const [prezzoListinoModifica,setPrezzoListinoModifica]=useState(selectedVehicle.prezzo_listino);
@@ -20,6 +20,9 @@ import axios from "axios";const VehicleModifyModal = ({ selectedVehicle, setIsMo
     const handleAlimentazioneChange=(e)=>{
         const alimentazioneModifica=e.target.value;
         setAlimentazioneModifica(alimentazioneModifica);
+        if (alimentazioneModifica === "elettrica") {
+            setClasse_ambientaleModifica("elettrico");
+        }
     }
     const handleCambioChange=(e)=>{
         const cambioModifica=e.target.value;
@@ -59,20 +62,22 @@ import axios from "axios";const VehicleModifyModal = ({ selectedVehicle, setIsMo
             targa:targaModifica,
         };
         try{
-            const response= await axios.put(`https://gestioneconcessionaria.onrender.com/api/veicoli/${selectedVehicle.id}/`,veicoloAggiornato);
-            if (response.status === 200) {
+            const config = {
+                headers: {
+                'Authorization': `Bearer ${token}`, // 'token' arriva dalle props (Drilling)
+                'Content-Type': 'application/json'  // Specifichiamo che mandiamo dati JSON
+                }
+            }
+            const response= await axios.put(`https://gestioneconcessionaria.onrender.com/api/veicoli/${selectedVehicle.id}/`,veicoloAggiornato,config);
+            
             veicoloAggiornato=response.data;
             setVeicoli(prev=>prev.map(v=>v.id==selectedVehicle.id ? veicoloAggiornato : v));
             alert("Veicolo aggiornato con successo!");            
             close(); // Chiudiamo il modal
-        }
     } catch (error) {
-    console.error(error, error.response?.data);
-    if (error.response?.data) {
-        const messaggi = Object.entries(error.response.data)
-            .map(([campo, errore]) => `${campo}: ${errore}`)
-            .join("\n");
-        alert("Errore di validazione:\n" + messaggi);
+    if (error.response?.status === 401) {
+        alert("Sessione scaduta, effettua di nuovo il login.");
+        logout(); // Forza il ritorno al login
     } else {
         alert("Errore di connessione al server.");
     }
@@ -194,7 +199,7 @@ import axios from "axios";const VehicleModifyModal = ({ selectedVehicle, setIsMo
                                         Euro 6
                                     </option>
                                     <option value="elettrico">
-                                        Zero
+                                        Elettrico
                                     </option>
                                 </select>
                             </div>
