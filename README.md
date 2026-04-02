@@ -6,7 +6,7 @@ Questo progetto è una **Single Page Application (SPA)** progettata per la gesti
 ---
 
 ## 🚀 Live Demo
-**Link al progetto:** [INSERISCI_QUI_IL_TUO_LINK_VERCEL_O_RENDER]
+**Link al progetto:** https://gestione-concessionaria.vercel.app/
 
 > [!IMPORTANT]
 > **Nota sulle prestazioni:** Il backend è ospitato su **Render (Piano Free)**. All'apertura, il database potrebbe richiedere **30-60 secondi** per "svegliarsi" dal cold start. Una volta attivo, le chiamate API saranno istantanee.
@@ -55,3 +55,48 @@ const config = {
     }
 };
 // Esempio: axios.post(url, data, config)
+
+##📦 Installazione Rapida
+Segui questi passaggi per avviare il progetto in locale.
+
+1. Clonazione del Progetto
+git clone [LINK_DELLA_TUA_REPOSITORY]
+cd [NOME_CARTELLA_PROGETTO]
+
+2. Configurazione Backend (Django)
+# Entra nella cartella backend
+cd backend
+
+# Crea un ambiente virtuale
+python -m venv venv
+
+# Attiva l'ambiente (Windows)
+venv\Scripts\activate
+# Attiva l'ambiente (Mac/Linux)
+source venv/bin/activate
+
+# Installa le dipendenze
+pip install -r requirements.txt
+
+# Esegui le migrazioni del database
+python manage.py migrate
+
+# Avvia il server
+python manage.py runserver
+
+3. Configurazione Frontend (React + Vite)
+# Apri un nuovo terminale nella cartella frontend
+cd frontend
+
+# Installa i pacchetti Node
+npm install
+
+# Avvia l'applicazione in modalità sviluppo
+npm run dev
+
+
+📧 Contatti
+Sviluppato da geriko70
+Progetto realizzato per dimostrare competenze Full-Stack, gestione della sicurezza JWT e manipolazione dinamica dei dati in React.
+GITHUB:https://github.com/geriko70/
+LINKEDIN:www.linkedin.com/in/davide-orlandino-bb94a22ab
