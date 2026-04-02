@@ -8,7 +8,7 @@ const SalesTable = ({vendite,setVeicoli,setVendite,token,logout}) => {
     const [showSortMenu,setShowSortMenu]=useState(false);
     const [filtroData, setFiltroData] = useState("");
     const [filtroTarga,setFiltroTarga]=useState("");
-    const [ordineVendita,setOrdineVendita]=useState("data_recente");
+    const [ordineVendita,setOrdineVendita]=useState("data_ultimi");
     const handleTargaChange=(e)=>{
         setFiltroTarga(e.target.value.toUpperCase());
     }
@@ -39,11 +39,11 @@ const SalesTable = ({vendite,setVeicoli,setVendite,token,logout}) => {
     case "prezzo_decrescente":
         venditeOrdinate.sort((a, b) => b.prezzo_vendita_effettivo - a.prezzo_vendita_effettivo);
         break;
-    case "data_crescente":
+    case "data_ultimi":
         // Convertiamo in oggetto Date per il confronto
         venditeOrdinate.sort((a, b) => new Date(b.data_vendita) - new Date(a.data_vendita));
         break;
-    case "data_decrescente":
+    case "data_primi":
         venditeOrdinate.sort((a, b) => new Date(a.data_vendita) - new Date(b.data_vendita));
         break;
     default:
@@ -83,8 +83,8 @@ const SalesTable = ({vendite,setVeicoli,setVendite,token,logout}) => {
                             <div className="dropdown">
                                 <div className={`dropdown-menu ${showSortMenu ? 'show' : ''}`} 
                                     style={{ display: showSortMenu ? 'block' : 'none', right: 0, left: 'auto' }}>
-                                    <button className="dropdown-item" onClick={() => { setOrdineVendita("data_crescente"); setShowSortMenu(false); }}>data crescente</button>
-                                    <button className="dropdown-item" onClick={() => { setOrdineVendita("data_decrescente"); setShowSortMenu(false); }}>data decrescente</button>
+                                    <button className="dropdown-item" onClick={() => { setOrdineVendita("data_ultimi"); setShowSortMenu(false); }}>Ultimi</button>
+                                    <button className="dropdown-item" onClick={() => { setOrdineVendita("data_primi"); setShowSortMenu(false); }}>Primi</button>
                                     <hr className="dropdown-divider" />
                                     <button className="dropdown-item" onClick={() => { setOrdineVendita("prezzo_crescente"); setShowSortMenu(false); }}>Prezzo crescente</button>
                                     <button className="dropdown-item" onClick={() => { setOrdineVendita("prezzo_decrescente"); setShowSortMenu(false); }}>Prezzo decrescente</button>

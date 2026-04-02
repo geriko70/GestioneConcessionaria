@@ -19,16 +19,6 @@ const Sidebar = ({setActiveTab, activeTab,logout}) => {
           🚗 Inventario
           </button>
         </li>
-        <li>
-          <a href="#" className="nav-link text-white mb-2">
-             👥 Clienti
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link text-white mb-2">
-             ⚙️ Impostazioni
-          </a>
-        </li>
       </ul>
       <h2 className=' fw-bold text-center text-success'>{usernameLoggato}</h2>
       <hr/>
