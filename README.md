@@ -95,8 +95,8 @@ npm install
 npm run dev
 
 
-📧 Contatti
-Sviluppato da geriko70
-Progetto realizzato per dimostrare competenze Full-Stack, gestione della sicurezza JWT e manipolazione dinamica dei dati in React.
+# 📧 Contatti
+### *Sviluppato da geriko70
+Progetto realizzato per dimostrare competenze Full-Stack, gestione della sicurezza JWT e manipolazione dinamica dei dati in React.*
 GITHUB:https://github.com/geriko70/
 LINKEDIN:www.linkedin.com/in/davide-orlandino-bb94a22ab
