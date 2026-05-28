@@ -100,10 +100,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
 # Verità: Se c'è DATABASE_URL (su Render), usa Postgres. Altrimenti SQLite.
+
 DATABASES = {
     'default': dj_database_url.config(
         default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',
-        conn_max_age=600
+        conn_max_age=600,
+        ssl_require=os.environ.get('DATABASE_URL', '').startswith('postgres')
     )
 }
 
