@@ -10,7 +10,8 @@ Questo progetto è una **Single Page Application (SPA)** progettata per la gesti
 
 > [!IMPORTANT]
 > **Nota sulle prestazioni:** Il backend è ospitato su **Render (Piano Free)**. All'apertura, il database potrebbe richiedere **30-60 secondi** per "svegliarsi" dal cold start. Una volta attivo, le chiamate API saranno istantanee.
-
+> username:admin_veloce
+> password:PasswordSicura123!
 ---
 
 ## 🔐 Sicurezza e Autenticazione (Security-First)
