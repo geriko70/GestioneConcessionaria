@@ -9,7 +9,7 @@ Questo progetto è una **Single Page Application (SPA)** progettata per la gesti
 **Link al progetto:** https://gestione-concessionaria.vercel.app/
 
 > [!IMPORTANT]
-> **Nota sulle prestazioni:** Il backend è ospitato su **Render (Piano Free)**. All'apertura, il database potrebbe richiedere **30-60 secondi** per "svegliarsi" dal cold start. Una volta attivo, le chiamate API saranno istantanee.
+> **Nota sulle prestazioni:** Il backend è ospitato su **Render (Piano Free)** e il database su Neon. All'apertura, il database potrebbe richiedere **30-60 secondi** per "svegliarsi" dal cold start. Una volta attivo, le chiamate API saranno istantanee.
 > username:admin
 > password:admin
 ---
