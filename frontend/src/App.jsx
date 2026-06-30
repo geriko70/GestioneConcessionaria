@@ -24,14 +24,14 @@ function App() {
     }
   };
     if(token){
-      axios.get('https://gestioneconcessionaria.onrender.com/api/veicoli/',config)
+      axios.get(`${import.meta.env.VITE_API_URL}/api/veicoli/`,config)
               .then(response => {
                   setVeicoli(response.data);
               })
               .catch(error => {
                   console.error("Errore API:", error);
               });
-      axios.get('https://gestioneconcessionaria.onrender.com/api/vendite/',config)
+      axios.get(`${import.meta.env.VITE_API_URL}/api/vendite/`,config)
               .then(response => {
                   setVendite(response.data);
               })

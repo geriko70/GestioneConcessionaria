@@ -16,7 +16,7 @@ const LoginForm = ({ loginEffettuato }) => {
 
         try {
             // Chiamata all'endpoint che abbiamo configurato in Django
-            const response = await axios.post('https://gestioneconcessionaria.onrender.com/api/token/', {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/token/`, {
                 username: username,
                 password: password
             });
